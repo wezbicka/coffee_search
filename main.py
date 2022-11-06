@@ -7,7 +7,9 @@ def load_coffee_shops(filepath):
 
 
 def main():
-    print(load_coffee_shops("coffee.json"))
+    file_content = load_coffee_shops("coffee.json")
+    cafe_name = file_content[0]['Name']
+    print(cafe_name)
 
 
 if __name__ == '__main__':
