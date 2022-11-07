@@ -4,6 +4,7 @@ from pprint import pprint
 
 from dotenv import load_dotenv
 from geopy import distance
+import folium
 
 import fetch_coordinates
 
@@ -15,6 +16,10 @@ def find_distance(latitude, longitude, cafe_coords):
 
 def get_distance(cafe):
     return cafe['distance']
+
+
+def fetch_nearest_cafe(new_list_сoffeeshops):
+    return min(new_list_сoffeeshops, key=get_distance)
 
 
 def load_coffee_shops(filepath):
@@ -47,8 +52,16 @@ def main():
         new_list_сoffeeshops[num]["latitude"] = cafe_coords[0]
         new_list_сoffeeshops[num]["longitude"] = cafe_coords[1]
         latitude, longitude = change_coords(coords_point)
-    nearest_cafe = min(new_list_сoffeeshops, key=get_distance)
-    pprint(nearest_cafe)
+    close_coffee_shops = sorted(new_list_сoffeeshops, key=get_distance)
+    m = folium.Map(location=[latitude, longitude],
+                   zoom_start=12,
+                   tiles="Stamen Terrain")
+    for cafe in sorted_list[:5]:
+        folium.Marker([cafe['latitude'], cafe['longitude']],
+                      popup=cafe['title'],
+                      icon=folium.Icon(color="red",
+                                       icon="info-sign")).add_to(m)
+    m.save("index.html")
 
 
 if __name__ == '__main__':
