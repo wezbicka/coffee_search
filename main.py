@@ -2,13 +2,24 @@ import json
 import os
 
 from dotenv import load_dotenv
+from geopy import distance
 
 import fetch_coordinates
+
+
+def find_distance(latitude, longitude, cafe_coords):
+    length = distance.distance((latitude, longitude), cafe_coords).km
+    return length
 
 
 def load_coffee_shops(filepath):
     with open("coffee.json", "r", encoding="CP1251") as file:
         return json.load(file)
+
+
+def change_coords(coords_user_point):
+    longitude, latitude = coords_user_point
+    return latitude, longitude
 
 
 def main():
@@ -24,7 +35,10 @@ def main():
 
     location = input("Где вы находитесь? ")
     coords_point = fetch_coordinates.fetch_coordinates(apikey, location)
-    print(coords_point)
+    latitude, longitude = change_coords(coords_point)
+    distance = find_distance(latitude, longitude, cafe_coords)
+    print(distance)
+
 
 if __name__ == '__main__':
     main()
