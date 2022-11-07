@@ -13,6 +13,10 @@ def find_distance(latitude, longitude, cafe_coords):
     return length
 
 
+def get_distance(cafe):
+    return cafe['distance']
+
+
 def load_coffee_shops(filepath):
     with open("coffee.json", "r", encoding="CP1251") as file:
         return json.load(file)
@@ -43,7 +47,8 @@ def main():
         new_list_сoffeeshops[num]["latitude"] = cafe_coords[0]
         new_list_сoffeeshops[num]["longitude"] = cafe_coords[1]
         latitude, longitude = change_coords(coords_point)
-    pprint(new_list_сoffeeshops)
+    nearest_cafe = min(new_list_сoffeeshops, key=get_distance)
+    pprint(nearest_cafe)
 
 
 if __name__ == '__main__':
