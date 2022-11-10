@@ -1,6 +1,5 @@
 import json
 import os
-from pprint import pprint
 
 from dotenv import load_dotenv
 from geopy import distance
@@ -40,7 +39,7 @@ def read_file():
 
 def main():
     load_dotenv()
-    apikey = os.environ['apikey']
+    apikey = os.environ['API_KEY']
     сoffeeshops = load_coffee_shops("coffee.json")
     location = input("Где вы находитесь? ")
     coords_point = fetch_coordinates.fetch_coordinates(apikey, location)
@@ -70,7 +69,7 @@ def main():
                       icon=folium.Icon(color="red",
                                        icon="info-sign")).add_to(m)
     m.save("index.html")
-    
+
     app = Flask(__name__)
     app.add_url_rule('/', 'coffee map', read_file)
     app.run('0.0.0.0')
