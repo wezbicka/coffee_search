@@ -1,4 +1,4 @@
-# Ищем, где выбить кофе
+# Ищем, где выпить кофе
 
 Поиск ближайших кофеен в Москве по выбраннной локации
 
@@ -7,6 +7,7 @@
 ## Требования
 
 Необходимо получить ключ для доступа к [геокодеру Яндекса](https://developer.tech.yandex.ru/).
+
 Подробная инструкция по [Yandex geocoder API](https://devman.org/encyclopedia/api-docs/yandex-geocoder-api/)
 
 Перед использованием получите API ключ в [кабинете разработчика](https://passport.yandex.ru/auth/welcome?origin=apikeys&retpath=https%3A%2F%2Fdeveloper.tech.yandex.ru%2F)
