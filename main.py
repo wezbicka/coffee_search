@@ -45,18 +45,18 @@ def main():
     coords_point = fetch_coordinates.fetch_coordinates(apikey, location)
     latitude, longitude = change_coords(coords_point)
     new_list_сoffeeshops = []
-    for num, cafe in enumerate(сoffeeshops):
+    for cafe in сoffeeshops:
         cafe_coords = (
             cafe['geoData']['coordinates'][1],
             cafe['geoData']['coordinates'][0],
         )
         distance = find_distance(latitude, longitude, cafe_coords)
-        new_list_сoffeeshops.append({})
-        new_list_сoffeeshops[num]["title"] = cafe['Name']
-        new_list_сoffeeshops[num]["distance"] = distance
-        new_list_сoffeeshops[num]["latitude"] = cafe_coords[0]
-        new_list_сoffeeshops[num]["longitude"] = cafe_coords[1]
-        latitude, longitude = change_coords(coords_point)
+        new_list_сoffeeshops.append({
+            "title": cafe['Name'],
+            "distance": distance,
+            "latitude": cafe_coords[0],
+            "longitude": cafe_coords[1],
+        })
     close_coffee_shops = sorted(new_list_сoffeeshops, key=get_distance)
     m = folium.Map(
         location=[latitude, longitude],
