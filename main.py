@@ -23,7 +23,7 @@ def fetch_nearest_cafe(new_list_сoffeeshops):
 
 
 def load_coffee_shops(filepath):
-    with open("coffee.json", "r", encoding="CP1251") as file:
+    with open(filepath, "r", encoding="CP1251") as file:
         return json.load(file)
 
 
